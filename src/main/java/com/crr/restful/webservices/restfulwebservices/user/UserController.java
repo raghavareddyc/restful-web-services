@@ -23,7 +23,9 @@ public class UserController {
     //get one user
     @GetMapping(path="/users/{id}")
     public User getOneUser(@PathVariable int id){
-        return service.getUser(id);
+        User user = service.getUser(id);
+        if(user == null) throw new UserNotFoundException("id - " + id);
+        return user;
     }
 
 
