@@ -26,7 +26,7 @@ public class UserController {
     UserDaoService service;
 
     @Autowired
-    private MessageSource bundleMessageSource;
+    private MessageSource messageSource;
 
     //get all users
     @GetMapping(path = "/users")
@@ -74,7 +74,7 @@ public class UserController {
 
     @GetMapping(path="/ref-internationalization")
     public String sampleInternationalization() {
-        return bundleMessageSource.getMessage("good.morning.message", null, LocaleContextHolder.getLocale());
+        return messageSource.getMessage("good.morning.message", null, LocaleContextHolder.getLocale());
     }
 
     @GetMapping(path="/locale")
