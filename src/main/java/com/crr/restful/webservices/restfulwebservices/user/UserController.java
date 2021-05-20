@@ -4,6 +4,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Locale;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     UserDaoService service;
+
+    @Autowired
+    private MessageSource bundleMessageSource;
 
     //get all users
     @GetMapping(path = "/users")
@@ -64,5 +69,15 @@ public class UserController {
     public void deleteOneUser(@PathVariable int id){
         User user = service.deleteUserById(id);
         if(user == null) throw new UserNotFoundException("id - " + id);
+    }
+
+    @GetMapping(path="/ref-internationalization")
+    public String sampleInternationalization(@RequestHeader(name = "Accept-Language", required = true) Locale locale){
+        return bundleMessageSource.getMessage("good.morning.message", null, locale);
+    }
+
+    @GetMapping(path="/locale")
+    public String locale(){
+        return "locale";
     }
 }
