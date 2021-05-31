@@ -3,7 +3,7 @@ package com.crr.restful.webservices.restfulwebservices.Filtering;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value = {"field1", "field2"})
+//@JsonIgnoreProperties(value = {"field1", "field2"})
 public class SomeBean {
     private String field1;
     private String field2;
